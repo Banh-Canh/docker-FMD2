@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv bash
+
+if [ -n "${UMASK_SET}" ] && [ -z "${UMASK}" ]; then
+  echo -e "You are using a legacy method of defining umask\nplease update your environment variable from UMASK_SET to UMASK\nto keep the functionality after July 2021"
+  umask ${UMASK_SET}
+fi
+
+chown abc:abc /downloads -R
+cd /app/FMD2
+if [ ! -f '/app/FMD2/userdata/settings.json' ]; then cp /settings.json /FMD2/userdata/settings.json; fi
+chown abc:abc /wine -R
+chown abc:abc /app -R
+chown abc:abc /app/FMD2 -R
+chown abc:abc /fmd2.sh -R
+chmod +x /fmd2.sh
+#chown abc:abc /usr/share/novnc -R
+
+exec \
+        s6-setuidgid abc /fmd2.sh
