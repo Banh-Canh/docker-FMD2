@@ -1,6 +1,6 @@
 ## Descriptions
 
-Dockerized FMD2 using VNC, noVNC and webSocketify to display GUI on a webpage.
+Dockerized FMD2 (Windows with Wine) using VNC, noVNC and webSocketify to display GUI on a webpage.
 
 ## Features:
 * Does not require any display, works headless
