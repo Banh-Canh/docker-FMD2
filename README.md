@@ -4,7 +4,7 @@ Dockerized FMD2 using VNC, noVNC and webSocketify to display GUI on a webpage.
 
 ## Features:
 * Does not require any display, works headless
-* Keep all of FMD2 features
+* Keeps all of FMD2 features
 * Since it's docker, it works on Linux
 * Make use of Linuxserver alpine base image
 
