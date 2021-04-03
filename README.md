@@ -30,11 +30,11 @@ services:
     ports:
       - 6080:6080
     volumes:
-      - /opt/docker-userdata/FMD2/config/userdata:/app/FMD2/userdata
-      - /opt/docker-userdata/FMD2/config/modules:/app/FMD2/lua
-      - /opt/docker-userdata/FMD2/config/data:/app/FMD2/data
-      - /opt/docker-userdata/FMD2/config/wine:/wine
-      - /mnt/DATA2/Bin:/downloads
+      - /path/to/FMD2/userdata:/app/FMD2/userdata
+      - /path/to/FMD2/modules:/app/FMD2/lua
+      - /path/to/FMD2/data:/app/FMD2/data
+      - /path/to/wine/data:/wine
+      - /path/to/downloads:/downloads
     restart: unless-stopped
 ```
 
