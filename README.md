@@ -6,6 +6,8 @@ https://github.com/dazedcat19/FMD2
 
 https://hub.docker.com/r/banhcanh/docker-fmd2
 
+Make sure to configure it using the 'web' ui.
+
 ## Features:
 * Does not require any display, works headless
 * Keeps all of FMD2 features
