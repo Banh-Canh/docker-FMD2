@@ -20,7 +20,7 @@ Make sure to configure it using the 'web' ui.
 version: "2.1"
 services:
   fmd2:
-    image: fmd2
+    image: banhcanh/docker-fmd2
     container_name: fmd2
     environment:
       - PUID=1000
