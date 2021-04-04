@@ -1,5 +1,8 @@
 FROM ghcr.io/linuxserver/baseimage-alpine:3.13
 
+LABEL \
+  maintainer="TKVictor-Hang@outlook.fr"
+
 ENV \
   WINEPREFIX=/wine \
   DISPLAY=:1 \
