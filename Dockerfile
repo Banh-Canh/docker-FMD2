@@ -4,9 +4,9 @@ LABEL \
   maintainer="TKVictor-Hang@outlook.fr"
 
 ENV \
-  WINEPREFIX=/wine \
   DISPLAY=:1 \
-  WINEDLLOVERRIDES="mscoree,mshtml="
+  WINEDLLOVERRIDES="mscoree,mshtml=" \
+  HOME=/config
 
 RUN \
   apk update && \
@@ -21,7 +21,7 @@ RUN \
   echo "Install vnc, novnc, websockify to move the gui accessible with the browser" && \
   apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
   novnc websockify && \
-  apk add --no-cache xvfb x11vnc
+  apk add --no-cache xvfb x11vnc fluxbox
 
 RUN \
   echo "Download latest FMD2 from github repo"
@@ -34,23 +34,31 @@ RUN curl -s https://api.github.com/repos/dazedcat19/FMD2/releases/latest | grep 
   mkdir /downloads && \
   chown abc:abc -R /downloads
 
+## Adjust noVNC windows
 RUN \
-  echo "Remove tools" && \
-  rm FMD2.7z && \
-  apk del p7zip wget curl --purge
+  rm /usr/share/novnc/vnc.html && \
+  mv /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html && \
+  curl https://raw.githubusercontent.com/novnc/noVNC/master/vnc_lite.html > /usr/share/novnc/index.html && \
+  sed -i '42s/.*/display:none;/' /usr/share/novnc/index.html && \
+  sed -i '50s/.*/display:none;/' /usr/share/novnc/index.html && \
+  sed -i '169s/.*/rfb.scaleViewport = readQueryVariable("scale", true);/' /usr/share/novnc/index.html
 
 # Copy my settings preset
 COPY settings.json /
 COPY fmd2.sh /
+ADD fluxbox /fluxbox
 
 # Create necessary folders and symlink novnc html so it opens directly on the right page
 RUN \
   mkdir /app/FMD2/userdata && \
-  mkdir /wine && \
-  chown abc:abc /app/FMD2 -R && \
-  ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html
+  chown abc:abc /app/FMD2 -R
 
 COPY root/ /
+
+RUN \
+  echo "Remove tools" && \
+  rm FMD2.7z && \
+  apk del p7zip wget curl --purge
 
 VOLUME /config
 EXPOSE 6080
