@@ -33,7 +33,7 @@ services:
       - /path/to/FMD2/userdata:/app/FMD2/userdata
       - /path/to/FMD2/modules:/app/FMD2/lua
       - /path/to/FMD2/data:/app/FMD2/data
-      - /path/to/wine/data:/wine
+      - /path/to/wine/data:/config/.wine
       - /path/to/downloads:/downloads
     restart: unless-stopped
 ```
