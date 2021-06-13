@@ -23,19 +23,16 @@ RUN \
   novnc websockify && \
   apk add --no-cache xvfb x11vnc fluxbox
 
-RUN \
-  echo "Download latest FMD2 from github repo"
-
 ADD https://api.github.com/repos/dazedcat19/FMD2/releases/latest version.json
+
 RUN curl -s https://api.github.com/repos/dazedcat19/FMD2/releases/latest | grep "browser_download_url.*download.*fmd.*64-win64.7z" | cut -d : -f 2,3 | tr -d '"' | wget -qi - -O FMD2.7z && \
 
   echo "Install FMD2" && \
   7z x FMD2.7z -o/app/FMD2 && \
   mkdir /downloads && \
-  chown abc:abc -R /downloads
+  chown abc:abc -R /downloads && \
 
 ## Adjust noVNC windows
-RUN \
   rm /usr/share/novnc/vnc.html && \
   mv /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html && \
   curl https://raw.githubusercontent.com/novnc/noVNC/master/vnc_lite.html > /usr/share/novnc/index.html && \
@@ -46,7 +43,7 @@ RUN \
 # Copy my settings preset
 COPY settings.json /
 COPY fmd2.sh /
-ADD fluxbox /fluxbox
+COPY fluxbox /fluxbox
 
 # Create necessary folders and symlink novnc html so it opens directly on the right page
 RUN \
