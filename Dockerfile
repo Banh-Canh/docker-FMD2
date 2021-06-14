@@ -46,6 +46,7 @@ COPY fluxbox /fluxbox
 # Create necessary folders and symlink novnc html so it opens directly on the right page
 RUN \
   mkdir /app/FMD2/userdata && \
+  mkdir -p /tmp/.X11-unix && \
   chown abc:abc /app/FMD2 -R
 
 COPY root/ /
