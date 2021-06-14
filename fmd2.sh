@@ -4,4 +4,4 @@ x11vnc -display :1 -noipv6 -reopen -forever -repeat -shared -rfbport 5900 -noxda
 websockify -D --web=/usr/share/novnc/ 6080 localhost:5900 &
 fluxbox &
 wineserver -k
-wine /app/FMD2/fmd.exe
+wine64 /app/FMD2/fmd.exe
