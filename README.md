@@ -38,5 +38,9 @@ services:
     restart: unless-stopped
 ```
 
+## Kubernetes
+
+https://github.com/TKVH-Apps/fmd2
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
