@@ -44,4 +44,4 @@ RUN \
   apt autoremove -y p7zip-full wget curl --purge
 
 VOLUME /config
-EXPOSE 6080
+EXPOSE 3000
