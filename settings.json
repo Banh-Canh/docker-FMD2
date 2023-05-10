@@ -65,7 +65,7 @@
     "PDFQuality" : 100,
     "RemoveMangaNameFromChapter" : false,
     "GenerateChapterFolder" : true,
-    "ChapterCustomRename" : "%MANGA% -.- %CHAPTER%",
+    "ChapterCustomRename" : "%MANGA% - %CHAPTER%",
     "ConvertDigitVolume" : true,
     "ConvertDigitChapter" : true,
     "DigitVolumeLength" : 2,

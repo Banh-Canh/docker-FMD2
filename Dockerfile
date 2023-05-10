@@ -1,10 +1,9 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:ubuntujammy
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbullseye
 
 LABEL \
   maintainer="vhvictorhang@gmail.com"
 
 ENV \
-  DISPLAY=:1 \
   WINEDLLOVERRIDES="mscoree,mshtml=" \
   HOME=/config
 
@@ -29,14 +28,14 @@ RUN curl -s https://api.github.com/repos/dazedcat19/FMD2/releases/latest | grep 
 
 # Copy my settings preset
 COPY settings.json /app/FMD2/userdata/settings.json
-COPY fmd2.sh /
+COPY root /
 
 # Create necessary folders and symlink novnc html so it opens directly on the right page
 RUN \
   mkdir -p /app/FMD2/userdata && \
   chown abc:abc /app/FMD2 -R && \
   mkdir -p /root/defaults && \
-  echo "wine64 /app/FMD2/fmd.exe" > /root/defaults/autostart
+  echo wine64 "/app/FMD2/fmd.exe" > /defaults/autostart 
 
 RUN \
   echo "Remove tools" && \
