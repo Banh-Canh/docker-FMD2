@@ -33,7 +33,7 @@ RUN curl -s https://api.github.com/repos/dazedcat19/FMD2/releases/latest | grep 
 ## Adjust noVNC windows
   rm /usr/share/novnc/vnc.html && \
   mv /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html && \
-  curl https://raw.githubusercontent.com/novnc/noVNC/master/vnc_lite.html > /usr/share/novnc/index.html && \
+  curl https://raw.githubusercontent.com/novnc/noVNC/master/vnc_lite.html > /usr/share/novnc/index.html
   #sed -i '42s/.*/display:none;/' /usr/share/novnc/index.html && \
   #sed -i '50s/.*/display:none;/' /usr/share/novnc/index.html && \
   #sed -i '169s/.*/rfb.scaleViewport = readQueryVariable("scale", true);/' /usr/share/novnc/index.html
