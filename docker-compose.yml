@@ -1,0 +1,20 @@
+---
+version: "3"
+services:
+  fmd2:
+    build: ./
+    container_name: fmd2
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - UMASK=022 #optional
+    ports:
+      - 6080:6080
+    volumes:
+      - /path/to/FMD2/userdata:/app/FMD2/userdata
+      - /path/to/FMD2/modules:/app/FMD2/lua
+      - /path/to/FMD2/data:/app/FMD2/data
+      - /path/to/wine/data:/config/.wine
+      - /path/to/downloads:/downloads
+    restart: unless-stopped

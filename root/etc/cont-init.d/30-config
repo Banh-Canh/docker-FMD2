@@ -11,6 +11,8 @@ chown abc:abc /app/FMD2 -R
 chown abc:abc /fmd2.sh -R
 chmod 1777 /tmp/.X11-unix -R
 chmod +x /fmd2.sh
+chmod ugo+rwx /app/FMD2/fmd.exe
+chmod -R ugo+rw-- /downloads
 
 if [ ! -d '/config/.fluxbox' ]; then
   cp /fluxbox /config/.fluxbox -r
