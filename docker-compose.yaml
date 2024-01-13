@@ -1,0 +1,21 @@
+---
+version: "3"
+services:
+  fmd2:
+    #build: ./
+    image: banhcanh/docker-fmd2:kasm-v2
+    container_name: fmd2
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - UMASK=022 #optional
+    ports:
+      - 3000:3000
+    volumes:
+      - ./tmp/FMD2/userdata:/app/FMD2/userdata
+      - ./tmp/FMD2/modules:/app/FMD2/lua
+      - ./tmp/FMD2/data:/app/FMD2/data
+      - ./tmp/FMD2/wine:/config/.wine
+      - ./tmp/downloads:/downloads
+    restart: unless-stopped
