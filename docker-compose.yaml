@@ -3,7 +3,7 @@ version: "3"
 services:
   fmd2:
     build: ./
-    #image: banhcanh/docker-fmd2:kasm-v2
+    #image: banhcanh/docker-fmd2:kasm-v3
     container_name: fmd2
     environment:
       - PUID=1000

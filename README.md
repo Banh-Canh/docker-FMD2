@@ -20,7 +20,7 @@ Make sure to configure it using the 'web' ui.
 version: "3"
 services:
   fmd2:
-    image: banhcanh/docker-fmd2:kasm-v2
+    image: banhcanh/docker-fmd2:kasm-v3
     container_name: fmd2
     environment:
       - PUID=1000
