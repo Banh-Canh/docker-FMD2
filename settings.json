@@ -56,7 +56,7 @@
     "Pass" : ""
   },
   "saveto" : {
-    "SaveTo" : "Z:\\downloads",
+    "SaveTo" : "downloads\\",
     "ChangeUnicodeCharacter" : false,
     "ChangeUnicodeCharacterStr" : "_",
     "GenerateMangaFolder" : true,

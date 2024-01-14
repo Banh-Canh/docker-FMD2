@@ -1,1 +1,3 @@
-wine64 /app/FMD2/fmd.exe
+cd /app/FMD2
+sync_dir /app/FMD2/downloads /downloads
+wine fmd.exe

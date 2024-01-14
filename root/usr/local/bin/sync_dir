@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Function to monitor changes using inotifywait and sync with rsync
+rsync -avz "$1"/ "$2"
+monitor_changes() {
+    while inotifywait -r -e modify,create,delete,move "$1"/; do
+        rsync -avz "$1"/ "$2"
+    done
+}
+
+monitor_changes "$1" "$2" &

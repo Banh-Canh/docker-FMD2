@@ -1,4 +1,6 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:ubuntujammy
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
+
+ARG FMD2_VERSION="2.0.32.0"
 
 LABEL \
   maintainer="vhvictorhang@gmail.com"
@@ -10,35 +12,18 @@ ENV \
 RUN \
   apt update && \
   apt install -y dpkg && \
-  echo "Install Wine and its dependencies" && \
   dpkg --add-architecture i386 && \
-  apt install -y wine64 && \
-#  ln -s /usr/bin/wine64 /usr/bin/wine && \
-  echo "Install required tools" && \
-  apt install -y wget p7zip-full curl
-
-ADD https://api.github.com/repos/dazedcat19/FMD2/releases/latest version.json
-
-RUN curl -s https://api.github.com/repos/dazedcat19/FMD2/releases/latest | grep "browser_download_url.*download.*fmd.*x86_64.*.7z" | cut -d : -f 2,3 | tr -d '"' | wget -qi - -O FMD2.7z && \
-  echo "Install FMD2" && \
+  apt install -y wine64=8.0~repack-4 wget p7zip-full curl git python3-pyxdg inotify-tools rsync &&\
+  curl -s https://api.github.com/repos/dazedcat19/FMD2/releases/tags/${FMD2_VERSION} | grep "browser_download_url.*download.*fmd.*x86_64.*.7z" | cut -d : -f 2,3 | tr -d '"' | wget -qi - -O FMD2.7z && \
   7z x FMD2.7z -o/app/FMD2 && \
+  rm FMD2.7z && \
+  apt autoremove -y p7zip-full wget curl --purge && \
   mkdir /downloads && \
-  chown abc:abc -R /downloads && \
-  mkdir -p /app/FMD2/userdata
+  mkdir -p /app/FMD2/userdata && \
+  mkdir -p /app/FMD2/downloads
 
 # Copy my settings preset
-COPY settings.json /app/FMD2/userdata/settings.json
-COPY root /
-
-# Create necessary folders and symlink novnc html so it opens directly on the right page
-RUN \
-  mkdir -p /app/FMD2/userdata && \
-  chown abc:abc /app/FMD2 -R
-
-RUN \
-  echo "Remove tools" && \
-  rm FMD2.7z && \
-  apt autoremove -y p7zip-full wget curl --purge
+COPY settings.json root /
 
 VOLUME /config
 EXPOSE 3000
