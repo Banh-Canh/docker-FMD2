@@ -17,10 +17,10 @@ Make sure to configure it using the 'web' ui.
 ## Docker
 ```yaml
 ---
-version: "2.1"
+version: "3"
 services:
   fmd2:
-    image: banhcanh/docker-fmd2
+    image: banhcanh/docker-fmd2:kasm-v2
     container_name: fmd2
     environment:
       - PUID=1000
@@ -28,13 +28,10 @@ services:
       - TZ=Europe/Paris
       - UMASK=022 #optional
     ports:
-      - 6080:6080
+      - 3000:3000
     volumes:
-      - /path/to/FMD2/userdata:/app/FMD2/userdata
-      - /path/to/FMD2/modules:/app/FMD2/lua
-      - /path/to/FMD2/data:/app/FMD2/data
-      - /path/to/wine/data:/config/.wine
-      - /path/to/downloads:/downloads
+      - ./tmp/FMD2/userdata:/app/FMD2/userdata
+      - ./tmp/downloads:/downloads
     restart: unless-stopped
 ```
 
