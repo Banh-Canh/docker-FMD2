@@ -1,16 +1,26 @@
 #!/bin/bash
 
-# Function to monitor changes using find with -cmin and sync with rsync
-
 monitor_changes() {
-    while true; do
-        echo "Monitoring..."
-        if [ -z "$(find "$1" -type f -cmin -"$THRESHOLD_MINUTES")" ]; then
-            echo "No files modified in the last $THRESHOLD_MINUTES minutes, executing."
-            rsync -avm --include='*/' --include=*"$TRANSFER_FILE_TYPE" --exclude='*' --remove-source-files  "$1"/ "$2"
-        fi
-        sleep 30
-    done
+
+	copied_files=""
+
+	while true; do
+		while IFS= read -r file; do
+			case "$copied_files" in
+				*"${file}"*)
+					;;
+				*)
+					rsync -av "$file" "$2/$(basename "$(dirname "$file")")/"
+					copied_files="${copied_files}${file}
+"
+					;;
+			esac
+		done < <(find "$1" -type f -name *"$TRANSFER_FILE_TYPE")
+
+		find "$1" -mindepth 1 -type d -cmin +"$THRESHOLD_MINUTES" -exec rm -r {} \;
+
+		sleep 20
+	done
 }
 
 monitor_changes "$1" "$2" &
