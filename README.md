@@ -27,6 +27,8 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
       - UMASK=022 #optional
+      - THRESHOLD_MINUTES=5
+      - TRANSFER_FILE_TYPE=.cbz
     ports:
       - 3000:3000
     volumes:
