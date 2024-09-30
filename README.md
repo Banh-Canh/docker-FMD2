@@ -1,3 +1,9 @@
+# ARCHIVED #
+
+This repo is no longer maintained, please go and see ElryGH's fork which fixed some issues:
+
+ https://github.com/ElryGH/docker-FMD2
+
 ## Descriptions
 
 Dockerized FMD2 (Windows with Wine) using VNC, noVNC and webSocketify to display GUI on a webpage.
